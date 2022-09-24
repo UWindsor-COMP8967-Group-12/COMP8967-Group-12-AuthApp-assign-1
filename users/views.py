@@ -6,7 +6,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views import View
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm
+from .forms import RegisterForm, UpdateUserForm, UpdateProfileForm
+
 
 def home(request):
     return render(request, 'users/home.html')
