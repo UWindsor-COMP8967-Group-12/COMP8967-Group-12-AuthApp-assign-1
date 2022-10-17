@@ -7,6 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.auth import views as auth_views
+from task.views import TaskCreate, TaskDetail, TaskList, TaskReorder, TaskUpdate, DeleteView
 from users.views import CustomLoginView, ResetPasswordView, ChangePasswordView
 
 from users.forms import LoginForm
@@ -33,6 +34,13 @@ urlpatterns = [
 
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
 
+
+#     path('', TaskList.as_view(), name='tasks'),
+#     path('task/<int:pk>/', TaskDetail.as_view(), name='task'),
+#     path('task-create/', TaskCreate.as_view(), name='task-create'),
+#     path('task-update/<int:pk>/', TaskUpdate.as_view(), name='task-update'),
+#     path('task-delete/<int:pk>/', DeleteView.as_view(), name='task-delete'),
+#     path('task-reorder/', TaskReorder.as_view(), name='task-reorder'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
