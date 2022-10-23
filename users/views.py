@@ -14,7 +14,6 @@ from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 def home(request):
     return render(request, 'users/home.html')
 
-
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
@@ -70,13 +69,15 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
                       "if an account exists with the email you entered. You should receive them shortly." \
                       " If you don't receive an email, " \
                       "please make sure you've entered the address you registered with, and check your spam folder."
-    success_url = reverse_lazy('users-home')
+    success_url = reverse_lazy('tasks')
+
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'users/change_password.html'
     success_message = "Successfully Changed Your Password"
-    success_url = reverse_lazy('users-home')
+    success_url = reverse_lazy('tasks')
+
 
 @login_required
 def profile(request):
