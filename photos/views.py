@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @login_required(login_url='login')
-def gallery(request):
+def photos(request):
     user = request.user
     category = request.GET.get('category')
     if category == None:
@@ -19,7 +19,7 @@ def gallery(request):
 
     categories = Category.objects.filter(user=user)
     context = {'categories': categories, 'photos': photos}
-    return render(request, 'photos/gallery.html', context)
+    return render(request, 'photos/photos.html', context)
 
 
 @login_required(login_url='login')
@@ -54,18 +54,19 @@ def addPhoto(request):
                 image=image,
             )
 
-        return redirect('gallery')
+        return redirect('photos')
 
     context = {'categories': categories}
     return render(request, 'photos/addPhoto.html', context)
 
 
+# need to enter password again to delete photo
 @login_required(login_url='login')
 def deletePhoto(request, pk):
     photo = Photo.objects.get(id=pk)
     if request.method == 'POST':
         photo.delete()
-        return redirect('gallery')
+        return redirect('photos')
 
     context = {'photo': photo}
     return render(request, 'photos/deletePhoto.html', context)
@@ -78,7 +79,7 @@ def updatePhoto(request, pk):
         form = EditPhoto(request.POST, request.FILES, instance=photo)
         if form.is_valid():
             form.save()
-            return redirect('gallery')
+            return redirect('photos')
     else:
         photo = Photo.objects.get(id=pk)
         form = EditPhoto(instance=photo)
