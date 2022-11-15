@@ -21,7 +21,6 @@ def photos(request):
     context = {'categories': categories, 'photos': photos}
     return render(request, 'photos/photos.html', context)
 
-
 @login_required(login_url='login')
 def viewPhoto(request, pk):
     photo = Photo.objects.get(id=pk)
@@ -59,15 +58,13 @@ def addPhoto(request):
     context = {'categories': categories}
     return render(request, 'photos/addPhoto.html', context)
 
-
-# need to enter password again to delete photo
+# Method to deletePhoto only when provided with user's password 
 @login_required(login_url='login')
 def deletePhoto(request, pk):
     photo = Photo.objects.get(id=pk)
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.check_password(request.POST.get('password')):
         photo.delete()
         return redirect('photos')
-
     context = {'photo': photo}
     return render(request, 'photos/deletePhoto.html', context)
 

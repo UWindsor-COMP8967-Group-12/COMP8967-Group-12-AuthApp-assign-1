@@ -16,19 +16,17 @@
         <div class="mx-auto max-w-md px-6 py-10 bg-gray-200 border-0 shadow-lg sm:rounded-3xl">
             <h1 class="text-2xl font-bold mb-8"></h1>
             <p>Are you sure you want to delete your <samp class="font-bold">{{ photo }}</samp>?
-            All of your data will be permanently removed. This action cannot be undone.</p>
-            <hr>
-            <br>
-            <br>
-            <form method="POST" novalidate enctype="multipart/form-data">
-                    {% csrf_token %}
-            <button id="button"
-                    type="submit"
-                    class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-red-500  hover:bg-black-600 hover:shadow-lg focus:outline-none">Yes, sure</button>
+                All of your data will be permanently removed. This action cannot be undone.</p>
 
-                <button id="button"
-                class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-indigo-500  hover:bg-black-600 hover:shadow-lg focus:outline-none">
-                <a href="{% url 'photos' %}">Cancel</a></button>
+            <p> <strong> Please enter Password below to confirm Deletion:</strong></p>
+            <hr>
+            <form method="POST" novalidate enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="relative z-0 w-full mb-5">
+                    <input type="password" name="password" placeholder=" " autocomplete="off" required
+                        class="pt-3 pb-1 text-sm text-gray-900 placeholder-gray-400 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                    <button id="button" type="submit"
+                        class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-red-500  hover:bg-black-600 hover:shadow-lg focus:outline-none">Delete</button>
             </form>
         </div>
     </div>
@@ -37,8 +35,7 @@
 
 
 
-</div>
+    </div>
 </body>
 
 </html>
-

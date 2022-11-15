@@ -21,6 +21,38 @@
             text-decoration: none;
             color: black;
         }
+
+        .img-wrapper {
+            position: relative;
+        }
+
+        .img-responsive {
+            width: 100%;
+            height: auto;
+        }
+
+        .img-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .img-overlay::before {
+            content: ' ';
+            display: inline-block;
+            /* adjust 'height' to position overlay content vertically */
+            height: 50%;
+        }
+
+        .img-overlay::after {
+            content:' ';
+            display: block;
+        
+        }
     </style>
 </head>
 
@@ -61,27 +93,25 @@
                     {% for photo in photos %}
                     <div class="col-md-4">
                         <div class="card my-2">
-                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
-
-                            <div class="card-body">
-                                <small>Category: {{photo.category.name}}</small>
+                            <div class="img-wrapper">
+                                <img class="img-responsive" src="{{ photo.image.url }}">
+                                <div class="img-overlay">
+                                    <a href="{% url 'photo' photo.id %}"
+                                        class="btn btn-outline-dark btn-sm m-1">View</a>
+                                    <a href="{% url 'edit' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Edit</a>
+                                    <a href="{% url 'delete' photo.id %}"
+                                        class="btn btn-outline-dark btn-sm m-1">Delete</a>
+                                </div>
+                                <div class="card-body">
+                                    <small>Category: {{photo.category.name}}</small>
+                                </div>
+                                
                             </div>
-                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
-                            <a href="{% url 'edit' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Edit</a>
-                            <a href="{% url 'delete' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Delete</a>
                         </div>
                     </div>
                     {% empty %}
                     <h3>No photos...</h3>
                     {% endfor %}
-
-
-
-
-
-
-
-
                 </div>
             </div>
         </div>
