@@ -65,6 +65,9 @@ def deletePhoto(request, pk):
     if request.method == 'POST' and request.user.check_password(request.POST.get('password')):
         photo.delete()
         return redirect('photos')
+    else:
+        msg = 'Wrong password, please try again'
+        return render(request, 'photos/deletePhoto.html', {'photo': photo, 'msg': msg})
     context = {'photo': photo}
     return render(request, 'photos/deletePhoto.html', context)
 

@@ -22,6 +22,7 @@
             <hr>
             <form method="POST" novalidate enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ msg }}
                 <div class="relative z-0 w-full mb-5">
                     <input type="password" name="password" placeholder=" " autocomplete="off" required
                         class="pt-3 pb-1 text-sm text-gray-900 placeholder-gray-400 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
